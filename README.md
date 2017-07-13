@@ -1,11 +1,11 @@
 
-*Goal*
+##Goal
 
-# Scaffold & build a React App to hit IDM endpoint
-# Implement a Class List component
-# Wire it up to a button
+*Scaffold & build a React App to hit IDM endpoint
+*Implement a Class List component
+*Wire it up to a button
 
-*What will you need?*
+##What will you need?
 
 Create-react-app
 npm install -g create-react-app
