@@ -7,6 +7,9 @@
 
 **What will you need?**
 
+* SIF token
+* Int endpoints
+
 ```Create-react-app
 npm install -g create-react-app
 create-react-app react-teacher
@@ -14,8 +17,10 @@ cd react-teacher/
 npm install axios
 npm start```
 
-* SIF token
-* Int endpoints
+
+
+
+
 
 
 
