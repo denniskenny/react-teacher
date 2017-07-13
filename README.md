@@ -7,12 +7,12 @@
 
 **What will you need?**
 
-`Create-react-app
+```Create-react-app
 npm install -g create-react-app
 create-react-app react-teacher
 cd react-teacher/
 npm install axios
-npm start`
+npm start```
 
 SIF token
 Int endpoints
