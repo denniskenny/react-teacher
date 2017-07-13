@@ -1,9 +1,9 @@
 
 **Goal**
 
-*Scaffold & build a React App to hit IDM endpoint
-*Implement a Class List component
-*Wire it up to a button
+* Scaffold & build a React App to hit IDM endpoint
+* Implement a Class List component
+* Wire it up to a button
 
 **What will you need?**
 
@@ -14,8 +14,8 @@ cd react-teacher/
 npm install axios
 npm start```
 
-SIF token
-Int endpoints
+* SIF token
+* Int endpoints
 
 
 
