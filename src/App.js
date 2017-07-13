@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ClassListComponent from './components/classListComponent.jsx';
 import './App.css';
-
 
 class App extends Component {
 
-  handleClick(e) {
+    constructor(props){
+        super(props);
 
-    // AUTH_TOKEN needs to be constantly updated
-    var criteria,
-        AUTH_TOKEN = 'SIF_HMACSHA256 ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKb2RIUndjem92TDJsa1pXNTBhWFI1TG1Gd2FTNW9iV2hqYnk1amIyMGlMQ0poZFdRaU9pSm9kSFJ3T2k4dmQzZDNMbWh0YUdOdkxtTnZiU0lzSW1saGRDSTZNVFE1T1Rrek5qYzJNaXdpYzNWaUlqb2lZMjVjZFRBd00yUkhiMnhrWlc1bmJHOTNJRTF2ZEdnc2RXbGtYSFV3TUROa1oyOXNaR1Z1WjJ4dmQxOXRiM1JvTEhWdWFYRjFaVWxrWlc1MGFXWnBaWEpjZFRBd00yUTNPRGcxWkdJMFl5MWlNalJrTFRReU1EZ3RPRFZsWXkwelpXUTBZamc0T1RVeE1EZ3NiMXgxTURBelpEa3lNREF3TkRjMUxHUmpYSFV3TUROa09USXdNREEwTnpRaUxDSm9kSFJ3T2k4dmQzZDNMbWx0YzJkc2IySmhiQzV2Y21jdmFXMXpjSFZ5YkM5c2FYTXZkakV2ZG05allXSXZjR1Z5YzI5dUlqcGJJa2x1YzNSeWRXTjBiM0lpWFN3aVpHbHpkRjlwWkNJNklqUmtNVEF4TURneExURmxOR0l0TkdZellTMWhNR1kzTFdFNVlqZzVPR0l3TVdSaU55SXNJbk5qYUc5dmJGOXBaQ0k2SWpobVlXTmhOR1UwTFdJeU56UXROR1l3TkMwNE1qTXpMVGhoTnpoaU1HTTNZMlZtTnlJc0luTmphRzl2YkY5eVpXWnBaQ0k2SWpobVlXTmhOR1UwTFdJeU56UXROR1l3TkMwNE1qTXpMVGhoTnpoaU1HTTNZMlZtTnlJc0lsQnNZWFJtYjNKdFNXUWlPaUpKUkZNaUxDSmpiMjUwWlhoMFNXUWlPaUlpTENKa2FYTjBYM0psWm1sa0lqb2lOR1F4TURFd09ERXRNV1UwWWkwMFpqTmhMV0V3WmpjdFlUbGlPRGs0WWpBeFpHSTNJaXdpYzJOb2IyOXNYMk5oZEdWbmIzSjVJam9pSWl3aWFuUnBJam9pTkdZME1ETTNaak10TUdVM1pTMDBPV0UxTFdJd01ESXRaRGc1WmpNMVpqa3pORE00SWl3aVkyeHBaVzUwWDJsa0lqb2lNVFV5WTJWa05UQXRNVE0yT1MwMFlqRTVMVGhpTWpZdE9HWXpaRFZrT1dKbVpEWmhMbWh0YUdOdkxtTnZiU0lzSW1WNGNDSTZNVFV3TURBeU16RTJNbjAuaWhodks1bU5xSEVWcHJzVm0zLUVrNlFMbGs2M3pFRmJqVk5IODdzV1BRQTpPZjcxYUhSNzNjbFE4VE1YdVE0dWRnVFlUTUpQTmpST054UGdnczJDRzhvPQo=';
+        this.state = {classes: [{name:'None'}]};
 
-    e.preventDefault();
+        let AUTH_TOKEN = 'SIF_HMACSHA256 ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKb2RIUndjem92TDJsa1pXNTBhWFI1TG1Gd2FTNW9iV2hqYnk1amIyMGlMQ0poZFdRaU9pSm9kSFJ3T2k4dmQzZDNMbWh0YUdOdkxtTnZiU0lzSW1saGRDSTZNVFE1T1RrME5EWXlPQ3dpYzNWaUlqb2lZMjVjZFRBd00yUlVaV0ZqYUdWeUlERXdRMnhoYzNObGN5eDFhV1JjZFRBd00yUjBaV0ZqYUdWeVh6RXdZMnhoYzNObGN5eDFibWx4ZFdWSlpHVnVkR2xtYVdWeVhIVXdNRE5rWkdZek9HTTNaRE10WlRjME9TMDBOREptTFRnM05URXROMkZtTWpobU1qSXdNbUl4TEc5Y2RUQXdNMlE1TWpBd01EUTNOU3hrWTF4MU1EQXpaRGt5TURBd05EYzBJaXdpYUhSMGNEb3ZMM2QzZHk1cGJYTm5iRzlpWVd3dWIzSm5MMmx0YzNCMWNtd3ZiR2x6TDNZeEwzWnZZMkZpTDNCbGNuTnZiaUk2V3lKSmJuTjBjblZqZEc5eUlsMHNJbVJwYzNSZmFXUWlPaUkwWkRFd01UQTRNUzB4WlRSaUxUUm1NMkV0WVRCbU55MWhPV0k0T1RoaU1ERmtZamNpTENKelkyaHZiMnhmYVdRaU9pSTRabUZqWVRSbE5DMWlNamMwTFRSbU1EUXRPREl6TXkwNFlUYzRZakJqTjJObFpqY2lMQ0p6WTJodmIyeGZjbVZtYVdRaU9pSTRabUZqWVRSbE5DMWlNamMwTFRSbU1EUXRPREl6TXkwNFlUYzRZakJqTjJObFpqY2lMQ0pRYkdGMFptOXliVWxrSWpvaVNVUlRJaXdpWTI5dWRHVjRkRWxrSWpvaUlpd2laR2x6ZEY5eVpXWnBaQ0k2SWpSa01UQXhNRGd4TFRGbE5HSXROR1l6WVMxaE1HWTNMV0U1WWpnNU9HSXdNV1JpTnlJc0luTmphRzl2YkY5allYUmxaMjl5ZVNJNklpSXNJbXAwYVNJNklqUmtOV1kwWVdFeExUTXpZVFV0TkRKa05pMWlNMlZrTFdZeVpqTmxNR0ZqWlRaaU1DSXNJbU5zYVdWdWRGOXBaQ0k2SWpFMU1tTmxaRFV3TFRFek5qa3ROR0l4T1MwNFlqSTJMVGhtTTJRMVpEbGlabVEyWVM1b2JXaGpieTVqYjIwaUxDSmxlSEFpT2pFMU1EQXdNekV3TWpoOS5ZNmViTTBWdlNmeWFKN25jVG5HWE9pU0poZndFWmEtblNEMi1OVE9PaDNvOjhjU2UwaWFjRTJjNXNsQmJNcXEzME5RM3BudHE5ZnhOQVpGZG83L2tUcjA9Cg==';
+        axios.defaults.baseURL = 'http://int.hmhone.app.hmhco.com/api/';
+        axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        this.teacher_id =   'df38c7d3-e749-442f-8751-7af28f2202b1';
+    }
 
-    axios.defaults.baseURL = 'http://int.hmhone.app.hmhco.com/api/';
-    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    handleSuccess = (response) => {
+        this.setState((prevState, props)=> (
+        {classes : response.data}))
+    }
+    handleFailure = (error) =>{
+        console.log(error);
+    }
 
-    axios.get('/identity/v4/teachers/7885db4c-b24d-4208-85ec-3ed4b8895108/sections')
-        .then(function (response) {
-          console.log(response);
-          alert(response.data[0].name);
-        })
-        .catch(function (error) {
-          console.log(error);
-    });
+    handleClick = (e) =>  {
+        e.preventDefault();
+        axios.get(`/identity/v4/teachers/${this.teacher_id}/sections`)
+            .then(this.handleSuccess)
+            .catch(this.handleFailure);
   };
-
 
   render() {
     return (
@@ -36,6 +40,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
           <button onClick={this.handleClick}>Fetch Class list</button>
+          <ClassListComponent list={this.state.classes} />
         </p>
       </div>
     );
