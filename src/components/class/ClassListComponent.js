@@ -6,7 +6,7 @@ import {ListGroup, ListGroupItem} from 'react-bootstrap';
 export const ClassListComponent = (props) => {
   return (
     <div>
-      <ListGroup>
+      <ListGroup className="classListGroup">
          {props.classes.map(item => (<ListGroupItem key={item.classLocalId} ><ClassItem name={item.name} /></ListGroupItem>))} 
       </ListGroup>
     </div>
