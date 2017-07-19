@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+
 import './App.css';
-import { ClassListComponent } from './components/class';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { getClasses } from './lib/teacherHelper';
+import { ClassListComponent } from './components/class';
 
 
 class App extends Component {
@@ -27,5 +29,7 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {classList: PropTypes.array}
 
 export default App;
