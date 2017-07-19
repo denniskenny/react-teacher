@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ListGroupItem } from 'react-bootstrap';
 
 
 export const ClassItem = (props) => {
     return (
-        <h3>{props.name}</h3>
+        <div>
+            {props.classes.map(item => (<ListGroupItem key={item.classLocalId + "1"} ><h3>{item.name}</h3></ListGroupItem>))}
+        </div>
     )
 }
 
-ClassItem.propTypes = {item: PropTypes.object}
+ClassItem.propTypes = { item: PropTypes.object }

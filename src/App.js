@@ -1,29 +1,27 @@
-
 import './App.css';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { getClasses } from './lib/teacherHelper';
+import _ from 'lodash';
+import { getClasses } from './actions/classActions';
 import { ClassListComponent } from './components/class';
 
 
 class App extends Component {
 
-  state = {
-    classList: []
+  componentWillMount() {
+    this.props.getClasses();
   }
 
-  componentWillMount() {
-    getClasses().then(classesList => this.setState({ classList: classesList }));
-  }
-  
   render() {
+    const {classes} = this.props;
     return (
       <div className="App">
         <div className="App-header">
-          <h2>React-Teacher App</h2>
+          <h2>React Teacher App</h2>
         </div>
         <section className="App-intro">
-          <ClassListComponent classes={this.state.classList} />
+          <ClassListComponent classes={classes} />
         </section>
       </div>
     );
@@ -32,4 +30,15 @@ class App extends Component {
 
 App.propTypes = {classList: PropTypes.array}
 
-export default App;
+const mapStateToProps = (state, props) => {
+  const list = _.get(state, 'classes.list', [{id: null, name: 'Loading...'}]);
+  console.log('MSTP ::: ' + JSON.stringify(state, null, 4));
+  return { classes: list};
+}
+
+const mapDispatchToProps = {
+  getClasses
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
