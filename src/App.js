@@ -32,7 +32,6 @@ App.propTypes = {classList: PropTypes.array}
 
 const mapStateToProps = (state, props) => {
   const list = _.get(state, 'classes.list', [{id: null, name: 'Loading...'}]);
-  console.log('MSTP ::: ' + JSON.stringify(state, null, 4));
   return { classes: list};
 }
 
