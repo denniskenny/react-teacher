@@ -1,10 +1,8 @@
-
 import './App.css';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getClasses } from './lib/teacherHelper';
 import { ClassListComponent } from './components/class';
-
 
 class App extends Component {
 
