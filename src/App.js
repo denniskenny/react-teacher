@@ -9,19 +9,19 @@ import { ClassListComponent } from './components/class';
 
 class App extends Component {
 
-  componentWillMount() {
-    this.props.getClasses();
+  componentWillMount() {//onInit, before fully mounted
+    this.props.getClasses();//automatically run
   }
 
   render() {
-    const {classes} = this.props;
+    const {classes} = this.props;//defining a local alias for props
     return (
       <div className="App">
         <div className="App-header">
           <h2>React Teacher App</h2>
         </div>
         <section className="App-intro">
-          <ClassListComponent classes={classes} />
+          <ClassListComponent classes={classes} /> {/*passing the data down*/}
         </section>
       </div>
     );
@@ -30,12 +30,12 @@ class App extends Component {
 
 App.propTypes = {classList: PropTypes.array}
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state, props) => {//this connects the state and the props
   const list = _.get(state, 'classes.list', [{id: null, name: 'Loading...'}]);
   return { classes: list};
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps = {//flags these functions as functions that throws actions
   getClasses
 };
 

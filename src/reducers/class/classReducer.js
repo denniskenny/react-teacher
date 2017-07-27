@@ -2,8 +2,8 @@ import { RECIEVE_GETCLASSES_RESPONSE } from './../../constants/actionTypes';
 
 export const classReducer = (state = [], action = {}) => {
     switch (action.type) {
-        case RECIEVE_GETCLASSES_RESPONSE:
-            if (action.type === "start") {
+        case RECIEVE_GETCLASSES_RESPONSE://if i get this action i will run through the following if statement
+            if (action.type === "start") {//promise's status
                 return { isLoading: true, error: false }
             } else if (action.error) {
                 return { isloading: false, error: true }
