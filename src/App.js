@@ -21,7 +21,7 @@ class App extends Component {
           <h2>React Teacher App</h2>
         </div>
         <section className="App-intro">
-          <ClassListComponent classes={classes} /> /*passing the data down*/
+          <ClassListComponent classes={classes} /> {/*passing the data down*/}
         </section>
       </div>
     );
