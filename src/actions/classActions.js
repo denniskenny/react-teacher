@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RECIEVE_GETCLASSES_RESPONSE} from '../constants/actionTypes';
+import {RECIEVE_GETCLASSES_RESPONSE} from '../constants/actionTypes';//list of strings
 
 //put the getClasses request here from the helper lib JS file
 export const getClasses = () => {
@@ -9,8 +9,8 @@ export const getClasses = () => {
         axios.defaults.baseURL = 'http://int.hmhone.app.hmhco.com/api/';
         axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        return {
-            type: RECIEVE_GETCLASSES_RESPONSE,
+        return {//return an action, the reducer will 'hear' this and try to fire the action
+            type: RECIEVE_GETCLASSES_RESPONSE,//this is where the action is returned
             payload: axios.get(`/identity/v4/teachers/${teacher_id}/sections`)
         };
 }

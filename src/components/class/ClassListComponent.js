@@ -13,4 +13,4 @@ export const ClassListComponent = (props) => {
   )
 }
 
-ClassListComponent.propTypes = { classes: PropTypes.array }
+ClassListComponent.propTypes = { classes: PropTypes.array }//type checking?

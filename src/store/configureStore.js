@@ -6,7 +6,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 
 const logger = createLogger();
 
-function configureStoreDev(initialState = {}) {
+function configureStoreDev(initialState = {}) {//in case you want different setups for diff environments - think turn off logging in prod etc
     const middleware = [ 
         //add in future workshop (thunk / loggers etc)
         thunk,
